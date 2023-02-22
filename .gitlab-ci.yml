@@ -1,0 +1,5 @@
+build-airport:
+  stage: build
+  script:
+    - cd airports
+    - docker build .
