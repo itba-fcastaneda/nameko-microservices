@@ -3,3 +3,15 @@ build-airport:
   script:
     - cd airports
     - docker build .
+
+build-gateway:
+  stage: build
+  script:
+    - cd gateway
+    - docker build .
+
+build-trips:
+  stage: build
+  script:
+    - cd trips
+    - docker build .
