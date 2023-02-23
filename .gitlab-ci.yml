@@ -1,8 +1,19 @@
+preparation:
+  stage: prepare
+  script:
+    - echo "BUILD_ID=$(date +%Y%m%d%H%M)" > context.env
+  artifacts: 
+    paths: 
+      - context.env
+
 build-airport:
   stage: build
   script:
+    - . context.env
     - cd airports
-    - docker build .
+    - docker build . -t airport:${BUILD_ID}
+  dependencies:
+    - preparation
 
 build-gateway:
   stage: build
@@ -15,3 +26,8 @@ build-trips:
   script:
     - cd trips
     - docker build .
+
+test-airport:
+  stage: testing
+  script:
+    - docker run --rm     
